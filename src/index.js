@@ -9,10 +9,10 @@ app.engine('hbs', handlebars.engine({
 app.set('view engine', 'hbs');
 app.set('views', './src/views');   //Показваме му къде да търси папкта views
 
-app.use(express.static('src/public'));  //Показваме му къде да търси папкта public
+app.use('/static', express.static('src/public'));  //Показваме му къде да търси папкта public
 
 app.get('/', (req, res) => {
-    res.send('Home', {layout: false});
+    res.send('home', {layout: false});
 });
 
 app.listen(5000, () => console.log('Server is listening on http://localhost:5000...'));
