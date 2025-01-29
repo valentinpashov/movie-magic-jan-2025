@@ -12,7 +12,7 @@ app.set('views', './src/views');   //Показваме му къде да тъ�
 app.use('/static', express.static('src/public'));  //Показваме му къде да търси папкта public
 
 app.get('/', (req, res) => {
-    res.send('home', {layout: false});
+    res.render('home');
 });
 
 app.listen(5000, () => console.log('Server is listening on http://localhost:5000...'));
