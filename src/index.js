@@ -9,6 +9,8 @@ app.engine('hbs', handlebars.engine({
 app.set('view engine', 'hbs');
 app.set('views', './src/views');   //Показваме му къде да търси папкта views
 
+app.use(express.static('src/public'));  //Показваме му къде да търси папкта public
+
 app.get('/', (req, res) => {
     res.send('Home', {layout: false});
 });
