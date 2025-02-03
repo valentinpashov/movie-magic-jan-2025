@@ -7,7 +7,7 @@ export default [
         imageUrl: '/static/img/jungle-cruise.jpeg',
         director: 'Jaume Collet-Serra',
         year: '2021',
-        rating: '6.6',
+        rating: 6.6,
         category: 'Movie',
     },
     {
@@ -18,7 +18,7 @@ export default [
         imageUrl: '/static/img/man-of-steel.jpg',
         director: 'Zack Snyder',
         year: '2013',
-        rating: '7.1',
+        rating: 7.1,
         category: 'Movie',
     },
     {
@@ -29,7 +29,7 @@ export default [
         imageUrl: '/static/img/endgame.jpg',
         director: 'Anthony',
         year: '2019',
-        rating: '8.4',
+        rating: 8.4,
         category: 'Movie',
     },
 ] 
