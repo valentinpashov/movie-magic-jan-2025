@@ -4,19 +4,22 @@ import Movie from "../models/Movie.js";
 
 export default {
   getAll(filter = {}) {
-  // let result =Movie.find({});   // .lean() дава данните под форма на стандартни обекти
+    let query = Movie.find({}); // .lean() дава данните под форма на стандартни обекти
 
-  //  if (filter.search) {
-  //    result = result.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()));
-  //  }
-  //  if (filter.genre) {
-  //    result = result.filter(movie => movie.genre.toLowerCase() === filter.genre.toLowerCase());
-  //  }
-  //  if (filter.year) {
-  //    result = result.filter(movie => movie.year === filter.year);
-  //  }
+    if (filter.search) {
+      // TODO fix partial case insensitive seearch
+      query = query.where({ title: filter.search });   //where = find
+    }
 
-    return Movie.find({});
+    if (filter.genre) {
+      // TODO add case inseensitve search
+      query = query.where({ genre: filter.genre });   //where = find
+    }
+    if (filter.year) {
+      query = query.where({ year: Number(filter.year) });   //where = find
+    }
+
+    return query;
   },
 
   getOne(movieId) {
@@ -26,8 +29,6 @@ export default {
   },
 
   create(movieData) {
-    const newId = uuid();
-
     movies.push({
       id: newId,
       ...movieData,
