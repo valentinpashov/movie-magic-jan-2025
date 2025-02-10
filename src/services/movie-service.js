@@ -37,13 +37,21 @@ export default {
     return result;
   },
   async attachCast(movieId, castId) {
-    //!Attach #1
+    
+    // !Attach #1    Използва 2 заявки до базата данни
+    /*
     const movie = await Movie.findById(movieId);
+    if(movie.casts.includes(castId)){
+      return;
+    }
     movie.casts.push(castId);
 
     await movie.save();
 
     return movie;
-    //!Attach #2
-  },
+    */
+
+    // !Attach #2   Използва 1 заявки до базата данни
+    return Movie.findByIdAndUpdate(movieId, {$push: {casts: castId}});
+  }
 };
