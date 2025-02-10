@@ -17,15 +17,17 @@ try {
 }
 
 //handlebars configuration
-app.engine(
-  "hbs",
-  handlebars.engine({
+app.engine("hbs", handlebars.engine({
     extname: "hbs",
+    runtimeOptions:{
+      allowProtoPropertiesByDefault: true,
+    },
     helpers: {
       showRating: showRatingHelper,
     },
   })
 );
+
 app.set("view engine", "hbs");
 app.set("views", "./src/views"); //Показваме му къде да търси папкта views
 
