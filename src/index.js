@@ -3,13 +3,16 @@ import handlebars from "express-handlebars";
 import routes from "./router.js";
 import showRatingHelper from "./helpers/rating-helper.js";
 import mongoose from "mongoose";
+import 'dotenv/config'   //трябва ни за .env
 
 const app = express();
 
 //db configuration
 try {
-  const uri = "mongodb://localhost:27017/magic-movies-jan2025";
-  await mongoose.connect(uri);
+  const defaultUri = "mongodb://localhost:27017/magic-movies-jan2025";
+  
+  await mongoose.connect(process.env.DATABASE_URI ?? defaultUri);   //всимаме го от .env  ?? ако няма първо взимаме localUri
+
   console.log("DB connected succesfuly");
 } catch (err) {
   console.log("Cannot connect to DB");
