@@ -2,7 +2,8 @@ import User from "../models/User.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const SECRET ='dgs37afscBLPuNgyRRmxJ8c3FgpRzhddR6x1tJribt8b3HV7icKoQR5O6uwMsm2';
+const SECRET =process.env.JWT_SECRET | 'BASICSECRET';   //Пътят до SECRET-a
+
 export default {
   register(userData) {  //Свързано с auth-controller.js //! Register
     return User.create(userData);
@@ -26,8 +27,9 @@ export default {
         id: user.id,
         email: user.email,
     };
+    //TODO: use async option
     const token = jwt.sign(payload, SECRET, {expiresIn:'2h'});
-    //return token
+  
     return token;
   },
 };

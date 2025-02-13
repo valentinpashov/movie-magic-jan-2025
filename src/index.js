@@ -5,6 +5,7 @@ import showRatingHelper from "./helpers/rating-helper.js";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";   //cookie
 import 'dotenv/config'   //трябва ни за .env
+import { authMiddleware } from "./middlewares/auth-middleware.js";
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.set("views", "./src/views"); //Показваме му къде да тър�
 app.use("/static", express.static("src/public")); //Показваме му къде да търси папкта public
 app.use(express.urlencoded({ extended: false })); //Learn express to parse form data
 app.use(cookieParser());      //cookie
+app.use(authMiddleware);
 //Setup routes
 app.use(routes); //  Казваме му да използва routes.js
 
