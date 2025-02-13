@@ -1,25 +1,32 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
-const SECRET = process.env.JWT_SECRET || "BASICSECRET";
+const SECRET = process.env.JWT_SECRET || 'BASICSECRET';
 
 export const authMiddleware = (req, res, next) => {
-  //Get token
-  const token = req.body["auth"];
+    const token = req.cookies['auth'];
 
-  if (token) {
-    return next();
-  }
+    if (!token) {
+        return next();
+    }
 
-  //Validate token
-  try {
-    const decodedToken = jwt.verify(token, SECRET);
+    try {
+        const decodedToken = jwt.verify(token, SECRET);
 
-    // Attach decoded token to request
-    req.user = decodedToken;
+        req.user = decodedToken;
+        res.locals.user = decodedToken;
+        
+        next();
+    } catch(err) {
+        res.clearCookie('auth');
+        res.redirect('/auth/login');
+    }
+};
+/*
+export const isAuth = (req, res, next) => {
+    if (!req.user) {
+        return res.redirect('/auth/login');
+    } 
 
     next();
-  } catch (err) {
-    res.clearCookie('auth');
-    res.redirect('/auth/login');
-  }
-};
+}
+*/
