@@ -3,6 +3,7 @@ import handlebars from "express-handlebars";
 import routes from "./router.js";
 import showRatingHelper from "./helpers/rating-helper.js";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";   //cookie
 import 'dotenv/config'   //трябва ни за .env
 
 const app = express();
@@ -37,7 +38,7 @@ app.set("views", "./src/views"); //Показваме му къде да тър�
 //Express configuration
 app.use("/static", express.static("src/public")); //Показваме му къде да търси папкта public
 app.use(express.urlencoded({ extended: false })); //Learn express to parse form data
-
+app.use(cookieParser());      //cookie
 //Setup routes
 app.use(routes); //  Казваме му да използва routes.js
 
